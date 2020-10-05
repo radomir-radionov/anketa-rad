@@ -2,7 +2,7 @@ const init = () => {
   const surname = getValue("Ваша фамилия?");
   const name = getValue("Ваше имя?");
   const patronymic = getValue("Ваше отчество?");
-  const age = getValue("Ваш возраст?");
+  const age = getValue("Ваш возраст?", true);
   const gen = getGen("Ваш пол - мужской?");
   const pension = getPension(age, gen);
 
@@ -20,9 +20,20 @@ const print = (surname, name, patronymic, age, getGen, pension) => {
   );
 };
 
-const getValue = (text) => {
+const getValue = (text, number) => {
   let value = prompt(text);
-  return value;
+
+  if (number) {
+    while (!Number(value)) {
+      value = prompt(text);
+    }
+    return value;
+  } else {
+    while (value === "") {
+      value = prompt(text);
+    }
+    return value;
+  }
 };
 
 const getGen = (text) => {
